@@ -3,10 +3,10 @@
 void update_xv (Particle GP [], double U);
 void update_ang(Particle GP[]);
 
-//void get_SP(Particle GP[], double F_SP[][D]){
+
+//add the self-propelled force: gamma*v0
 void get_SP(Particle GP[]){
     
-
     for (int i=0;i<N;i++){
 
         double e[D];
@@ -14,14 +14,13 @@ void get_SP(Particle GP[]){
         e[1]=sin(GP[i].ang);
 
         for (int d=0;d<D;d++)
-             GP[i].f[d]+=gam*v0*e[d]; // the angle will be updated as follows
+             GP[i].f[d]+=gam*v0*e[d]; 
     }
 
 }
 
 
-
-//void get_BM(Particle GP[], double F_BM[][D]){
+//add Brownian motion force (due to solvent) : -gamma*v+F_noise  
 void get_BM(Particle GP[]){
 
     // random generator    
@@ -110,6 +109,7 @@ void Dyn(Particle GP[], Particle& Probe, double U){
     update_ang(GP);
 
 }
+/*************************************************************************************/
 
 
 // update (pos, vel)
